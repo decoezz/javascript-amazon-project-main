@@ -1,4 +1,4 @@
-import{cart} from '../data/cart.js';
+import{cart,addtocart} from '../data/cart.js';
 import { products } from '../data/products.js';
 let productsHTMl ='';
 products.forEach((product) =>{
@@ -56,33 +56,23 @@ products.forEach((product) =>{
 });
 document.querySelector('.js-products-grid').innerHTML = productsHTMl;
 
+function updatecartquantity(){
+  let cartQuantity = 0;
+  cart.forEach((cartItem)=>{
+    cartQuantity += cartItem.quantity;
+  });
+  document.querySelector('.js-cart-button')
+  .innerHTML=cartQuantity;
+  console.log(cartQuantity);
+  console.log(cart);
+}
+
 //make the button interactive to give us certain data
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) =>{
     button.addEventListener('click',()=>{
         const productId =button.dataset.productId;
-        let matchingitem;
-        cart.forEach((item)=>{
-          if(productId === item.productId){
-            matchingitem = item;
-          }
-        });
-        if(matchingitem){
-          matchingitem.quantity+=1;
-        }else{
-          cart.push({
-            productId:productId,
-            quantity:1
-          })
-        }
-        //calculating cart quantity and displaying on page
-        let cartQuantity = 0;
-        cart.forEach((item)=>{
-          cartQuantity += item.quantity;
-        });
-        document.querySelector('.js-cart-button')
-        .innerHTML=cartQuantity;
-        console.log(cartQuantity);
-        console.log(cart);
+        addtocart(productId);
+        updatecartquantity();
     })
 })
