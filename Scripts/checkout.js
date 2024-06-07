@@ -11,7 +11,8 @@ cart.forEach((cartItem)=>{
             matchingproduct = product;
         }
     })
-    cartsummaryHTML +=
+    
+        cartsummaryHTML +=
     `
      <div class="cart-item-container js-cart-item-container-${matchingproduct.id}">
             <div class="delivery-date">
@@ -27,7 +28,7 @@ cart.forEach((cartItem)=>{
                   ${matchingproduct.name}
                 </div>
                 <div class="product-price">
-                  ${formatcurrency(matchingproduct.price)}
+                  $${formatcurrency(matchingproduct.priceCents)}
                 </div>
                 <div class="product-quantity">
                   <span>
