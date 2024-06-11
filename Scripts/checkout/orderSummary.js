@@ -1,29 +1,22 @@
 import { cart } from '../../data/cart.js';
-import { products } from '../../data/products.js';
+import { getProduct,products } from '../../data/products.js';
 import{formatcurrency} from '../utils/money.js';
 import { deletefromcart } from '../../data/cart.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import { deliveryOptions } from '../../data/delivryoptions.js';
+import { deliveryOptions,getDeliveryOption } from '../../data/delivryoptions.js';
 import { updateDeliveryOption } from '../../data/cart.js';
-const today = dayjs();
-const deliveryDate = today.add(7,'days');
-let cartsummaryHTML ='';
+
+
+
 export function renderOrderSummary(){
+    let cartsummaryHTML ='';
   cart.forEach((cartItem)=>{
     const productId = cartItem.productId;
-    let matchingproduct;
-    products.forEach((product)=>{
-        if(product.id === productId){
-            matchingproduct = product;
-        }
-    });
+    const matchingproduct = getProduct(productId);
+    
     const deliveryOptionId = cartItem.deliveryOptionId;
-    let deliveryOption;
-    deliveryOptions.forEach((option)=>{
-      if(option.id === deliveryOptionId){
-        deliveryOption = option;
-      }
-    })
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
+    
     const today = dayjs();
     const deliveryDate = today.add(
       deliveryOption.deliveryDays,
@@ -93,7 +86,7 @@ function deliveryOptionsHTML(matchingproduct,cartItem){
     `
     <div class="delivery-option js-delivery-option"
     data-product-id="${matchingproduct.id}"
-    data-delviery-option-id="${deliveryOption.id}">
+    data-delivery-option-id="${deliveryOption.id}">
       <input type="radio"
         ${isChecked ?'checked' : ''}
         class="delivery-option-input"
