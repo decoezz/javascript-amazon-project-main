@@ -8,8 +8,8 @@ import { updateDeliveryOption } from '../data/cart.js';
 const today = dayjs();
 const deliveryDate = today.add(7,'days');
 let cartsummaryHTML ='';
-
-cart.forEach((cartItem)=>{
+function renderOrderSummary(){
+  cart.forEach((cartItem)=>{
     const productId = cartItem.productId;
     let matchingproduct;
     products.forEach((product)=>{
@@ -125,5 +125,8 @@ document.querySelectorAll('.js-delivery-option')
     element.addEventListener('click',()=>{
       const {productId,deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId,deliveryOptionId);
-    })
+      renderOrderSummary(); //this is used to make the website render again after we change something in it
+    });
   })
+}
+renderOrderSummary();
