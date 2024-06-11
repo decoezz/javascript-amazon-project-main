@@ -5,6 +5,7 @@ import { deletefromcart } from '../../data/cart.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions,getDeliveryOption } from '../../data/delivryoptions.js';
 import { updateDeliveryOption } from '../../data/cart.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 
 
@@ -109,8 +110,10 @@ document.querySelectorAll('.js-delete-link').forEach((link)=>{
   link.addEventListener('click',()=>{
    const productId = link.dataset.productId;
    deletefromcart(productId);
+   
    const container =document.querySelector(`.js-cart-item-container-${productId}`);
    container.remove();
+   renderPaymentSummary();
   });
 })
 document.querySelectorAll('.js-delivery-option')
@@ -119,6 +122,7 @@ document.querySelectorAll('.js-delivery-option')
       const {productId,deliveryOptionId} = element.dataset;
       updateDeliveryOption(productId,deliveryOptionId);
       renderOrderSummary(); //this is used to make the website render again after we change something in it
+      renderPaymentSummary();
     });
   })
 }
