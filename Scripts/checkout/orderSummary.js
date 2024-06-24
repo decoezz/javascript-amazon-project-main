@@ -62,8 +62,8 @@ export function renderOrderSummary(){
           </div>
     `;
 })
-function deliveryOptionsHTML(matchingproduct,cartItem){
-
+function deliveryOptionsHTML(matchingproduct,cartItem)
+{
   let html = '';
   deliveryOptions.forEach((deliveryOption)=>{
     const today = dayjs();

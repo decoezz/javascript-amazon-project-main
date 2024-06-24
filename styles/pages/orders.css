@@ -24,7 +24,6 @@
   grid-template-columns: 1fr;
   row-gap: 50px;
 }
-
 .order-header {
   background-color: rgb(240, 242, 242);
   border: 1px solid rgb(213, 217, 217);
