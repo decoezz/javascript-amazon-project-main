@@ -27,7 +27,6 @@ export function renderOrderSummary(){
             <div class="delivery-date">
               Delivery date: ${dateString}
             </div>
-
             <div class="cart-item-details-grid">
               <img class="product-image"
                 src="${matchingproduct.image}">
